@@ -35,12 +35,13 @@ elixir(function(mix) {
             'resources/assets/css/normalize.css'
         )
         .styles([
-            "./public/css/app.css",
-            "font-awesome.css",
-            "normalize.css"
-        ], "public/css/all.css")
+            './public/css/app.css',
+            'font-awesome.css',
+            'normalize.css'
+        ], 'public/css/all.css')
         .scripts([
-            "jquery.js",
-            "bootstrap.js"
-        ], "public/js/all.js");
+            'jquery.js',
+            'bootstrap.js'
+        ], 'public/js/all.js')
+        .version('public/css/all.css');
 });

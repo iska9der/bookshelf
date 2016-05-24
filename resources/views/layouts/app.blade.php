@@ -10,8 +10,8 @@
     <!-- Fonts -->
 
     <!-- Styles -->
-    {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
-    {{ Html::style('css/all.css') }}
+    <link href="{{ elixir('css/all.css') }}" rel="stylesheet">
+    {{--{{ Html::style('css/all.css') }}--}}
 
     <style>
         body {
@@ -74,7 +74,7 @@
     @yield('content')
 
     <!-- JavaScripts -->
-    {{ HTML::script('js/all.js') }}
+    {{ Html::script('js/all.js') }}
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
 </html>
