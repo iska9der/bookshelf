@@ -1,9 +1,5 @@
 var elixir = require('laravel-elixir');
 
-var paths = {
-    'jquery': './vendor/bower_components/jquery/',
-    'bootstrap': '/vendor/bower_components/bootstrap-sass-official/assets/'
-};
 
 /*
  |--------------------------------------------------------------------------
@@ -17,18 +13,18 @@ var paths = {
  */
 
 elixir(function(mix) {
-    mix.sass('app.scss', 'public/css/', {includePaths: [paths.bootstrap + 'stylesheets/']})
+    mix.sass('app.scss')
         .copy(
             'vendor/bower_components/jquery/dist/jquery.min.js',
-            'public/js/vendor/jquery.js'
+            'resources/assets/js/jquery.js'
         )
         .copy(
             'vendor/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js',
-            'public/js/vendor/bootstrap.js'
+            'resources/assets/js/bootstrap.js'
         )
         .copy(
             'vendor/bower_components/font-awesome/css/font-awesome.min.css',
-            'public/css/vendor/font-awesome.css'
+            'resources/assets/css/font-awesome.css'
         )
         .copy(
             'vendor/bower_components/font-awesome/fonts',
@@ -36,7 +32,15 @@ elixir(function(mix) {
         )
         .copy(
             'vendor/bower_components/normalize-css/normalize.css',
-            'public/css/vendor/normalize.css'
-        );
-
+            'resources/assets/css/normalize.css'
+        )
+        .styles([
+            "./public/css/app.css",
+            "font-awesome.css",
+            "normalize.css"
+        ], "public/css/all.css")
+        .scripts([
+            "jquery.js",
+            "bootstrap.js"
+        ], "public/js/all.js");
 });

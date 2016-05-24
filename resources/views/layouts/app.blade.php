@@ -8,13 +8,10 @@
     <title>Bookshelf</title>
 
     <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
-    {{ Html::style('css/vendor/font-awesome.css') }}
 
     <!-- Styles -->
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
-    {{ Html::style('css/app.css') }}
-    {{ Html::style('css/vendor/normalize.css') }}
+    {{ Html::style('css/all.css') }}
 
     <style>
         body {
@@ -77,8 +74,7 @@
     @yield('content')
 
     <!-- JavaScripts -->
-    {{ HTML::script('js/vendor/jquery.js') }}
-    {{ HTML::script('js/vendor/bootstrap.js') }}
+    {{ HTML::script('js/all.js') }}
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
 </html>
