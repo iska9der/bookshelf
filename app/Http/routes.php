@@ -13,10 +13,7 @@
 
 Route::get('/', 'Controller@index');
 
-Route::get('books', 'BooksController@index');
-Route::get('books/add', 'BooksController@add');
-Route::get('books/{id}', 'BooksController@show');
-Route::post('books', 'BooksController@store');
+Route::resource('books', 'BooksController');
 
 Route::get('about', 'PagesController@about');
 

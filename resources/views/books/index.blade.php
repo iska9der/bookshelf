@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('partials.banner', ['header' => 'Книги', 'body' => 'Список всех существующих книг в нашей базе.'])
+    @include(
+    'partials.banner', [
+        'header' => 'Книги',
+        'body' => 'Список всех существующих книг в нашей базе.'
+        ]
+    )
 
     <div class="container">
         <div class="row">
