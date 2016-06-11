@@ -13,9 +13,10 @@
 
 Route::get('/', 'Controller@index');
 
+Route::resource('authors', 'AuthorsController');
 Route::resource('books', 'BooksController');
 
-Route::get('about', 'PagesController@about');
+Route::get('genres', 'GenresController@index');
+Route::get('genres/{id}', 'GenresController@show');
 
 Route::auth();
-Route::get('/home', 'HomeController@index');

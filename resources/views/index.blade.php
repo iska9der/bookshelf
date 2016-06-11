@@ -2,6 +2,8 @@
 
 @section('content')
 
-    <h2>Its a index page</h2>
+    <div class="container">
+        <h2>Its a index page</h2>
+    </div>
 
 @stop

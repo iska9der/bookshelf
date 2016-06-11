@@ -1,6 +1,12 @@
+
 <div class="form-group">
     {!! Form::label('title', 'Название') !!}
     {!! Form::text('title', null, ['class' => 'form-control']) !!}
+</div>
+
+<div class="form-group">
+    {!! Form::label('author_id', 'Автор') !!}
+    {!! Form::text('author_id', null, ['class' => 'form-control']) !!}
 </div>
 
 <div class="form-group">

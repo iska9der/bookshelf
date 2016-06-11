@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Book;
+use App\Author;
 use App\Http\Requests;
-use App\Http\Requests\BookRequest;
-use Auth;
+use App\Http\Requests\AuthorRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class BooksController extends Controller
+class AuthorsController extends Controller
 {
 
     public function __construct()
@@ -16,21 +16,20 @@ class BooksController extends Controller
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
-
     /**
-     * Вывод всех объектов
+     * Вывод всех авторов
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        $books = Book::latest()->created()->get();
+        $authors = Author::latest()->get();
 
-        return view('books.index', compact('books'));
+        return view('authors.index', compact('authors'));
     }
 
     /**
-     * Вывод одного объекта
+     *
      *
      * @param $id
      *
@@ -38,9 +37,9 @@ class BooksController extends Controller
      */
     public function show($id)
     {
-        $book = Book::findOrFail($id);
+        $author = Author::findOrFail($id);
 
-        return view('books.show', compact('book'));
+        return view('authors.show', compact('author'));
     }
 
     /**
@@ -50,24 +49,23 @@ class BooksController extends Controller
      */
     public function create()
     {
-        return view('books.create');
+        return view('authors.create');
     }
 
     /**
      * Сохранить
      *
-     * @param AddBookRequest|BookRequest $request
+     * @param AuthorRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(BookRequest $request)
+    public function store(AuthorRequest $request)
     {
+        $author = new Author($request->all());
 
-        $book = new Book($request->all());
+        Auth::user()->authors()->save($author);
 
-        Auth::user()->books()->save($book);
-
-        return redirect('books');
+        return redirect('authors');
     }
 
     /**
@@ -79,42 +77,42 @@ class BooksController extends Controller
      */
     public function edit($id)
     {
-        $book = Book::findOrFail($id);
+        $author = Author::findOrFail($id);
 
-        return view('books.edit', compact('book'));
+        return view('authors.edit', compact('author'));
     }
 
     /**
      * Внести изменения
-     *
+     * 
      * @param $id
-     * @param BookRequest $request
+     * @param AuthorRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update($id, BookRequest $request)
+    public function update($id, AuthorRequest $request)
     {
-        $book = Book::findOrFail($id);
+        $author = Author::findOrFail($id);
 
-        $book->update($request->all());
+        $author->update($request->all());
 
-        return redirect('books');
+        return redirect('authors');
     }
 
     /**
      * Удалить
      *
      * @param $id
-     * @param BookRequest $request
+     * @param AuthorRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy($id)
     {
-        $book = Book::findOrFail($id);
+        $author = Author::findOrFail($id);
 
-        $book->delete();
+        $author->delete();
 
-        return redirect('books');
+        return redirect('authors');
     }
 }
