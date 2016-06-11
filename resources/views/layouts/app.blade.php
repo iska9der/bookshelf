@@ -46,7 +46,9 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/') }}">Home</a></li>
+                    <li><a href="{{ url('/genres') }}">Genres</a></li>
                     <li><a href="{{ url('/books') }}">Books</a></li>
+                    <li><a href="{{ url('/authors') }}">Authors</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -58,7 +60,7 @@
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                {{ Auth::user()->username }} <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
