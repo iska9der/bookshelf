@@ -32,14 +32,12 @@ class BooksController extends Controller
     /**
      * Вывод одного объекта
      *
-     * @param $id
+     * @param Book $book
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show($id)
+    public function show(Book $book)
     {
-        $book = Book::findOrFail($id);
-
         return view('books.show', compact('book'));
     }
 
@@ -56,7 +54,7 @@ class BooksController extends Controller
     /**
      * Сохранить
      *
-     * @param AddBookRequest|BookRequest $request
+     * @param BookRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
@@ -73,29 +71,25 @@ class BooksController extends Controller
     /**
      * Редактировать
      * 
-     * @param $id
+     * @param Book $book
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(Book $book)
     {
-        $book = Book::findOrFail($id);
-
         return view('books.edit', compact('book'));
     }
 
     /**
      * Внести изменения
      *
-     * @param $id
+     * @param Book $book
      * @param BookRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update($id, BookRequest $request)
+    public function update(Book $book, BookRequest $request)
     {
-        $book = Book::findOrFail($id);
-
         $book->update($request->all());
 
         return redirect('books');
@@ -104,15 +98,12 @@ class BooksController extends Controller
     /**
      * Удалить
      *
-     * @param $id
-     * @param BookRequest $request
+     * @param Book $book
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function destroy($id)
+    public function destroy(Book $book)
     {
-        $book = Book::findOrFail($id);
-
         $book->delete();
 
         return redirect('books');
