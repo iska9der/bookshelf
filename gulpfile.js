@@ -33,15 +33,21 @@ elixir(function(mix) {
         .copy(
             'vendor/bower_components/normalize-css/normalize.css',
             'resources/assets/css/normalize.css'
-        )
-        .styles([
+        );
+
+    mix.styles([
             './public/css/app.css',
             'font-awesome.css',
-            'normalize.css'
-        ], 'public/css/all.css')
-        .scripts([
+            'normalize.css',
+            'select2.min.css'
+        ], 'public/css/all.css');
+
+    mix.scripts([
             'jquery.js',
-            'bootstrap.js'
-        ], 'public/js/all.js')
-        .version('public/css/all.css');
+            'bootstrap.js',
+            'script.js',
+            'select2.min.js'
+        ], 'public/js/all.js');
+
+    mix.version('public/css/all.css');
 });

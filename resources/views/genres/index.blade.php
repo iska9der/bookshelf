@@ -15,7 +15,7 @@
                     <div class="col-md-3">
                         <h1 class="heading">
                             <a href="{{ url('/genres', $genre->id) }}">
-                                {{ $genre->genre }}
+                                {{ $genre->name }}
                             </a>
                         </h1>
                     </div>

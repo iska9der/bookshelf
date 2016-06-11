@@ -13,7 +13,7 @@ class Book extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'author_id', 'genre_id', 'title', 'description', 'published_at'
+        'user_id', 'title', 'description', 'published_at'
     ];
 
     public function scopeCreated($query)
@@ -36,18 +36,26 @@ class Book extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function author()
-    {
-        return $this->belongsTo('App\Author');
-    }
+//    public function author()
+//    {
+//        return $this->belongsTo('App\Author');
+//    }
 
     /**
-     * Жанр владеет книгой
+     * Может принадлежать множествам жанров
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function genre()
+    public function genres()
     {
-        return $this->belongsTo('App\Genre');
+        return $this->belongsToMany('App\Genre')->withTimestamps();
+    }
+
+    /**
+     * @return array
+     */
+    public function getGenreListAttribute()
+    {
+        return $this->genres->lists('id');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Book;
+use App\Genre;
 use App\Http\Requests;
 use App\Http\Requests\BookRequest;
 use Auth;
@@ -48,7 +49,9 @@ class BooksController extends Controller
      */
     public function create()
     {
-        return view('books.create');
+        $genres = Genre::lists('name', 'id');
+
+        return view('books.create', compact('genres'));
     }
 
     /**
@@ -60,10 +63,9 @@ class BooksController extends Controller
      */
     public function store(BookRequest $request)
     {
+        $this->createBook($request);
 
-        $book = new Book($request->all());
-
-        Auth::user()->books()->save($book);
+        session()->flash('flash_message', 'Книга добавлена в библиотеку.');
 
         return redirect('books');
     }
@@ -77,7 +79,9 @@ class BooksController extends Controller
      */
     public function edit(Book $book)
     {
-        return view('books.edit', compact('book'));
+        $genres = Genre::lists('name', 'id');
+
+        return view('books.edit', compact('book', 'genres'));
     }
 
     /**
@@ -88,12 +92,15 @@ class BooksController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(Book $book, BookRequest $request)
+    public function update(BookRequest $request, Book $book)
     {
         $book->update($request->all());
 
+        $this->syncGenres($book, $request->input('genre_list'));
+
         return redirect('books');
     }
+
 
     /**
      * Удалить
@@ -107,5 +114,33 @@ class BooksController extends Controller
         $book->delete();
 
         return redirect('books');
+    }
+
+    /**
+     * Синхронизация жанров в БД
+     *
+     * @param Book $book
+     * @param array $genres
+     */
+    public function syncGenres(Book $book, array $genres)
+    {
+        $book->genres()->sync($genres);
+    }
+
+    /**
+     * Сохранить новую книгу
+     *
+     * @param BookRequest $request
+     *
+     * @return mixed
+     */
+    private function createBook(BookRequest $request)
+    {
+
+        $book = Auth::user()->books()->create($request->all());
+
+        $this->syncGenres($book, $request->input('genre_list'));
+
+        return $book;
     }
 }

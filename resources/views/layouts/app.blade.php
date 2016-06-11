@@ -45,18 +45,18 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/') }}">Home</a></li>
-                    <li><a href="{{ url('/genres') }}">Genres</a></li>
-                    <li><a href="{{ url('/books') }}">Books</a></li>
-                    <li><a href="{{ url('/authors') }}">Authors</a></li>
+                    <li><a href="{{ url('/') }}">Главная</a></li>
+                    <li><a href="{{ url('/genres') }}">Жанры</a></li>
+                    <li><a href="{{ url('/books') }}">Книги</a></li>
+                    <li><a href="{{ url('/authors') }}">Авторы</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
+                        <li><a href="{{ url('/login') }}">Войти</a></li>
+                        <li><a href="{{ url('/register') }}">Регистрация</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -64,7 +64,8 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                                <li><a href="{{ url('/profile') }}"><i class="fa fa-btn fa-user"></i>Профиль</a></li>
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Выход</a></li>
                             </ul>
                         </li>
                     @endif
@@ -73,10 +74,16 @@
         </div>
     </nav>
 
-    @yield('content')
+    <div class="container">
+        @include('partials.flash')
+
+        @yield('content')
+    </div>
 
     <!-- JavaScripts -->
     {{ Html::script('js/all.js') }}
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+
+    @yield('footer')
 </body>
 </html>

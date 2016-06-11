@@ -1,7 +1,7 @@
 
 <div class="form-group">
-    {!! Form::label('genre', 'Название жанра') !!}
-    {!! Form::text('genre', null, ['class' => 'form-control']) !!}
+    {!! Form::label('name', 'Название жанра') !!}
+    {!! Form::text('name', null, ['class' => 'form-control']) !!}
 </div>
 
 

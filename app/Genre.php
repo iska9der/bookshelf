@@ -12,16 +12,16 @@ class Genre extends Model
      * @var array
      */
     protected $fillable = [
-        'genre',
+        'name',
     ];
     
     /**
-     * Жанр может иметь множество книг
+     * Жанр может принадлежать множествам книг
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function books()
     {
-        return $this->hasMany('App\Book');
+        return $this->belongsToMany('App\Book', "book_genre");
     }
 }
