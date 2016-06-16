@@ -17,7 +17,7 @@
             <li class="list-group-item">
                 Автор:
                 @foreach($book->authors as $author)
-                    <b>{{ $author->name }}</b>
+                    <b><a href="{{ url('/authors', [$author->id]) }}">{{ $author->name }}</a></b>
                 @endforeach
             </li>
         @endunless
@@ -25,7 +25,7 @@
             <li class="list-group-item">
                 Жанр:
                 @foreach($book->genres as $genre)
-                    <b>{{ $genre->name }}</b>
+                    <b><a href="{{ url('/genres', [$genre->id]) }}">{{ $genre->name }}</a></b>
                 @endforeach
             </li>
         @endunless

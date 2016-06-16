@@ -1,13 +1,5 @@
-@extends('layouts.app')
+    {{--@include('errors.list')--}}
 
-@section('content')
-    <h1>Добавить книгу</h1>
-
-    <hr>
-    @include('errors.list')
-
-    {!! Form::model($book = new App\Book, ['url' => 'books']) !!}
-        @include('books.form', ['submitButtonText' => 'Добавить'])
+    {!! Form::model($review = new App\Review, ['url' => 'books']) !!}
+        @include('books.reviews.form', ['submitButtonText' => 'Добавить'])
     {!! Form::close() !!}
-
-@stop

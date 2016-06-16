@@ -1,13 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    @include(
-    'partials.banner', [
-        'header' => 'Книги',
-        'body' => 'Список всех существующих книг в нашей базе.'
-        ]
-    )
-
     <div class="container">
         @foreach (array_chunk($books->all(), 4) as $fourBooks)
             <div class="row">

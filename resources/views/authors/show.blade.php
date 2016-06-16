@@ -22,9 +22,11 @@
     <article>
         {{ $author->biography }}
     </article>
+    <hr>
+    <h2>Список имеющихся книг</h2>
     <ul>
-    @foreach($author->books as $book)
-        <li>$book</li>
-    @endforeach
+        @foreach($author->books as $book)
+            <li><a href="{{ url('/books', [$book->id]) }}">{{ $book->title }}</a></li>
+        @endforeach
     </ul>
 @stop
