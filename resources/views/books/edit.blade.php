@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Редактирование</h1>
+    <h1>Редактирование {{ $book->title }}</h1>
 
     <hr>
     @include('errors.list')

@@ -18,8 +18,10 @@
                                 {{ $author->name }}
                             </a>
                             <small>
-                                {{ strip_tags(str_limit($author->born, $limit = 4, $end = '')) }} -
-                                {{ strip_tags(str_limit($author->died, $limit = 4, $end = '')) }}
+                                {{ strip_tags(str_limit($author->born, $limit = 4, $end = '')) }} 
+                                @if ($author->died > 1)
+                                    - {{ strip_tags(str_limit($author->died, $limit = 4, $end = '')) }}
+                                @endif
                             </small>
                         </h1>
                         <p> {{ strip_tags(str_limit($author->biography, $limit = 140, $end = '...'))  }} </p>

@@ -4,6 +4,11 @@
     </div>
 
     <div class="form-group">
+        {!! Form::label('author_list', 'Авторы') !!}
+        {!! Form::select('author_list[]', $authors, null, ['id'=> 'author_list', 'class' => 'form-control', 'multiple']) !!}
+    </div>
+
+    <div class="form-group">
         {!! Form::label('genre_list', 'Жанры') !!}
         {!! Form::select('genre_list[]', $genres, null, ['id'=> 'genre_list', 'class' => 'form-control', 'multiple']) !!}
     </div>
@@ -26,6 +31,9 @@
         <script>
             $('#genre_list').select2({
                 placeholder: 'Выберите жанр'
+            });
+            $('#author_list').select2({
+                placeholder: 'Выберите автора'
             });
         </script>
     @endsection

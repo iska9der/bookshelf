@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Book;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -44,8 +45,24 @@ class User extends Authenticatable
         return $this->hasMany('App\Author');
     }
 
+
+    /**
+     * Пользователь может иметь множество рецензий
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function reviews()
+    {
+        return $this->hasMany('App\Review');
+    }
+
     public function isAdmin()
     {
+        if ($this->email === 'admin@gmail.com') {
+            return true;
+        }
+
         return false;
     }
+
 }

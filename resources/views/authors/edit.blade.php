@@ -6,7 +6,7 @@
     <hr>
     @include('errors.list')
 
-    {!! Form::model($author, ['method' => 'PATCH', 'action' => ['AuthorController@update', $author->id]]) !!}
+    {!! Form::model($author, ['method' => 'PATCH', 'action' => ['AuthorsController@update', $author->id]]) !!}
     @include('authors.form', ['submitButtonText' => 'Внести изменения'])
     {!! Form::close() !!}
 

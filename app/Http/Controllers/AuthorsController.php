@@ -61,9 +61,10 @@ class AuthorsController extends Controller
      */
     public function store(AuthorRequest $request)
     {
-        $author = new Author($request->all());
 
-        Auth::user()->authors()->save($author);
+        $this->createAuthor($request);
+
+        session()->flash('flash_message', 'Автор добавлен.');
 
         return redirect('authors');
     }
@@ -95,6 +96,8 @@ class AuthorsController extends Controller
         $author = Author::findOrFail($id);
 
         $author->update($request->all());
+        
+        session()->flash('flash_message', 'Информация изменена.');
 
         return redirect('authors');
     }
@@ -103,7 +106,6 @@ class AuthorsController extends Controller
      * Удалить
      *
      * @param $id
-     * @param AuthorRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
@@ -114,5 +116,20 @@ class AuthorsController extends Controller
         $author->delete();
 
         return redirect('authors');
+    }
+
+    /**
+     * Сохранить новую книгу
+     *
+     * @param AuthorRequest $request
+     *
+     * @return mixed
+     */
+    private function createAuthor(AuthorRequest $request)
+    {
+        $author = Auth::user()->authors()->create($request->all());
+
+        return $author;
+
     }
 }

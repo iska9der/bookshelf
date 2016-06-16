@@ -22,7 +22,7 @@ class Author extends Model
      */
     public function books()
     {
-        return $this->hasMany('App\Book');
+        return $this->belongsToMany('App\Book', 'author_book');
     }
 
 
@@ -34,5 +34,11 @@ class Author extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+
+    public function isOwner(User $user)
+    {
+        return ($this->user_id === $user->id);
     }
 }

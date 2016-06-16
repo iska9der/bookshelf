@@ -6,8 +6,8 @@
     <hr>
     @include('errors.list')
 
-    {!! Form::open(['url' => 'authors']) !!}
-    @include('authors.form', ['submitButtonText' => 'Добавить'])
+    {!! Form::model($author = new App\Author, ['url' => 'authors']) !!}
+        @include('authors.form', ['submitButtonText' => 'Добавить'])
     {!! Form::close() !!}
 
 @stop

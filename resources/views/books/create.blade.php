@@ -6,7 +6,7 @@
     <hr>
     @include('errors.list')
 
-    {!! Form::open(['url' => 'books']) !!}
+    {!! Form::model($book = new App\Book, ['url' => 'books']) !!}
         @include('books.form', ['submitButtonText' => 'Добавить'])
     {!! Form::close() !!}
 

@@ -3,6 +3,7 @@
 namespace App;
 
 use Carbon\Carbon;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
@@ -36,10 +37,10 @@ class Book extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-//    public function author()
-//    {
-//        return $this->belongsTo('App\Author');
-//    }
+    public function authors()
+    {
+        return $this->belongsToMany('App\Author')->withTimestamps();
+    }
 
     /**
      * Может принадлежать множествам жанров
@@ -56,6 +57,12 @@ class Book extends Model
      */
     public function getGenreListAttribute()
     {
-        return $this->genres->lists('id');
+        return $this->genres->lists('name');
+    }
+
+
+    public function isOwner(User $user)
+    {
+        return ($this->user_id === $user->id);
     }
 }

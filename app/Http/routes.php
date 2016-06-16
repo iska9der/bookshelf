@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'Controller@index');
+Route::get('admin', 'Controller@index')->middleware(['admin']);
 
 Route::resource('authors', 'AuthorsController');
 Route::resource('books', 'BooksController');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Author;
 use App\Book;
 use App\Genre;
 use App\Http\Requests;
@@ -15,6 +16,7 @@ class BooksController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware('owner', ['only' => ['edit', 'delete']]);
     }
 
 
@@ -50,8 +52,9 @@ class BooksController extends Controller
     public function create()
     {
         $genres = Genre::lists('name', 'id');
+        $authors = Author::lists('name', 'id');
 
-        return view('books.create', compact('genres'));
+        return view('books.create', compact('genres', 'authors'));
     }
 
     /**
@@ -80,8 +83,9 @@ class BooksController extends Controller
     public function edit(Book $book)
     {
         $genres = Genre::lists('name', 'id');
+        $authors = Author::lists('name', 'id');
 
-        return view('books.edit', compact('book', 'genres'));
+        return view('books.edit', compact('book', 'genres', 'authors'));
     }
 
     /**
@@ -96,7 +100,12 @@ class BooksController extends Controller
     {
         $book->update($request->all());
 
-        $this->syncGenres($book, $request->input('genre_list'));
+        if($request->input('genre_list')) {
+            $this->syncGenres($book, $request->input('genre_list'));
+        }
+        if($request->input('author_list')) {
+            $this->syncAuthors($book, $request->input('author_list'));
+        }
 
         return redirect('books');
     }
@@ -128,6 +137,17 @@ class BooksController extends Controller
     }
 
     /**
+     * Синхронизация авторов в БД
+     *
+     * @param Book $book
+     * @param array $authors
+     */
+    public function syncAuthors(Book $book, array $authors)
+    {
+        $book->authors()->sync($authors);
+    }
+
+    /**
      * Сохранить новую книгу
      *
      * @param BookRequest $request
@@ -139,8 +159,13 @@ class BooksController extends Controller
 
         $book = Auth::user()->books()->create($request->all());
 
-        $this->syncGenres($book, $request->input('genre_list'));
-
+        if($request->input('genre_list')) {
+            $this->syncGenres($book, $request->input('genre_list'));
+        }
+        if($request->input('author_list')) {
+            $this->syncAuthors($book, $request->input('author_list'));
+        }
+        
         return $book;
     }
 }

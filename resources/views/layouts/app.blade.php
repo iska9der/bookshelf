@@ -45,10 +45,9 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/') }}">Главная</a></li>
-                    <li><a href="{{ url('/genres') }}">Жанры</a></li>
                     <li><a href="{{ url('/books') }}">Книги</a></li>
                     <li><a href="{{ url('/authors') }}">Авторы</a></li>
+                    <li><a href="{{ url('/genres') }}">Жанры</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -58,6 +57,9 @@
                         <li><a href="{{ url('/login') }}">Войти</a></li>
                         <li><a href="{{ url('/register') }}">Регистрация</a></li>
                     @else
+                        @if (Auth::user()->isAdmin())
+                            <li><a href="{{ url('/admin') }}"><i class="fa fa-cog fa-spin fa-1x fa-fw"></i>Панель администратора</a></li>
+                        @endif
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::user()->username }} <span class="caret"></span>
