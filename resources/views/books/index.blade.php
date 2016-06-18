@@ -14,7 +14,7 @@
                 @foreach($fourBooks as $book)
                     <div class="col-md-3">
                         <h1 class="heading">
-                            <a href="{{ url('/books', $book->id) }}">
+                            <a class="text-uppercase" href="{{ url('/books', $book->id) }}">
                                 {{ $book->title }}
                             </a>
                             <small>
