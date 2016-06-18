@@ -21,7 +21,7 @@ Route::resource('books', 'BooksController');
 
 Route::group(['middleware' => ['web']], function(){
     Route::get('books/{book}/reviews', 'ReviewController@getIndex');
-    Route::post('books/reviews', 'ReviewController@postReview');
+    Route::post('books/{book}/reviews', 'ReviewController@postReview');
 
 });
 

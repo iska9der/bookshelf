@@ -59,7 +59,7 @@ class ReviewController extends Controller
      */
     private function createReview(ReviewRequest $request)
     {
-        $review = Auth::user()->reviews()->book()->create($request->all());
+        $review = Auth::user()->reviews()->create($request->all());
 
         return $review;
     }
