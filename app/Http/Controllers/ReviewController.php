@@ -15,8 +15,7 @@ class ReviewController extends Controller
 
     public function __construct()
     {
-//        $this->middleware('auth', ['except' => ['index', 'show']]);
-//        $this->middleware('owner', ['only' => ['edit', 'delete']]);
+        $this->middleware('owner', ['only' => ['edit', 'delete']]);
     }
 
 
@@ -31,7 +30,7 @@ class ReviewController extends Controller
     {
         $book = Book::find($id);
 
-        $reviews = $book->reviews()->latest()->get();
+        $reviews = $book->reviews()->orderBy('created_at', 'desc')->get();
 
         return view('books.reviews.index', compact('book', 'reviews'));
     }
@@ -43,8 +42,10 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function postReview(ReviewRequest $request)
+    public function postReview(Book $book, ReviewRequest $request)
     {
+        
+        $request->request->add(['book_id' => $book->id]);
 
         Auth::user()->reviews()->create($request->all());
 
@@ -53,4 +54,13 @@ class ReviewController extends Controller
         return redirect('books');
     }
 
+
+    public function destroy($id)
+    {
+        $review = Review::findOrFail($id);
+
+        $review->delete();
+
+        redirect('books');
+    }
 }

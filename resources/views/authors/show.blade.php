@@ -20,7 +20,7 @@
     </ul>
     <hr>
     <article>
-        {{ $author->biography }}
+        {!! nl2br(e($author->biography)) !!}
     </article>
     <hr>
     <h2>Список имеющихся книг</h2>

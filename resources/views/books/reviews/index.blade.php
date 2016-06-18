@@ -8,11 +8,12 @@
         </div>
         <h1>Последнии рецензии</h1>
         <section class="reviews">
-            @foreach($book->reviews as $review)
+            @foreach($reviews as $review)
                 <article class="review row">
                     <a href="{{ url('/users', [$review->user->id]) }}">
                         {{ $review->user->username }}
                     </a>
+                    <small>{{ $review->created_at }}</small>
                     <p>{{ $review->body }}</p>
                 </article>
             @endforeach

@@ -8,9 +8,9 @@
                 <a class="btn btn-default" href="{{ url('/books', [$book->id, 'edit']) }}">Изменить</a>
                 {!! Form::model($book, ['method' => 'DELETE', 'action' => ['BooksController@destroy', $book->id], 'style' => 'display:inline-block']) !!}
                 <button class="btn btn-danger" type="submit">Удалить</button>
+                {!! Form::close() !!}
             @endif
         @endif
-        {!! Form::close() !!}
     </div>
     <ul class="list-group">
         @unless ($book->authors->isEmpty())
@@ -35,7 +35,7 @@
     </ul>
     <hr>
     <article>
-        {{ $book->description }}
+        {!! nl2br(e($book->description)) !!}
     </article>
     <hr>
     <div class="page-header">
