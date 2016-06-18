@@ -3,7 +3,6 @@
 namespace App;
 
 use Carbon\Carbon;
-use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
@@ -50,6 +49,16 @@ class Book extends Model
     public function genres()
     {
         return $this->belongsToMany('App\Genre')->withTimestamps();
+    }
+
+    /**
+     * Может принадлежать множествам рецензий
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function reviews()
+    {
+        return $this->hasMany('App\Review');
     }
 
     /**

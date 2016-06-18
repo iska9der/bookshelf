@@ -15,7 +15,16 @@ Route::get('/', 'Controller@index');
 Route::get('admin', 'Controller@index')->middleware(['admin']);
 
 Route::resource('authors', 'AuthorsController');
+
 Route::resource('books', 'BooksController');
+
+
+Route::group(['middleware' => ['web']], function(){
+    Route::get('books/{book}/reviews', 'ReviewController@getIndex');
+    Route::post('books/reviews', 'ReviewController@postReview');
+
+});
+
 
 Route::get('genres', 'GenresController@index');
 Route::get('genres/{id}', 'GenresController@show');

@@ -15,8 +15,8 @@ class BooksController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'show']]);
-        $this->middleware('owner', ['only' => ['edit', 'delete']]);
+//        $this->middleware('auth', ['except' => ['index', 'show']]);
+//        $this->middleware('owner', ['only' => ['edit', 'delete']]);
     }
 
 
