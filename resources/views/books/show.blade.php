@@ -39,6 +39,11 @@
     </article>
     <hr>
     <div class="page-header">
-        <h1 class="text-uppercase">Рецензии</h1>
+        <h1 class="text-uppercase">
+            <a href="{{ url('/books', [$book->id, 'reviews']) }}">
+                Рецензии
+            </a>
+        </h1>
     </div>
+
 @stop
