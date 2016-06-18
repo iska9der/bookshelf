@@ -23,6 +23,8 @@ class ReviewController extends Controller
     /**
      * Вывод всех объектов
      *
+     * @param $id
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function getIndex($id)
@@ -43,24 +45,12 @@ class ReviewController extends Controller
      */
     public function postReview(ReviewRequest $request)
     {
-        $this->createReview($request);
+
+        Auth::user()->reviews()->create($request->all());
 
         session()->flash('flash_message', 'Рецензия добавлена.');
 
         return redirect('books');
     }
 
-    /**
-     * Сохранить новую рецензию
-     *
-     * @param ReviewRequest $request
-     *
-     * @return mixed
-     */
-    private function createReview(ReviewRequest $request)
-    {
-        $review = Auth::user()->reviews()->create($request->all());
-
-        return $review;
-    }
 }
