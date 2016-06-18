@@ -15,6 +15,7 @@ class ReviewController extends Controller
 
     public function __construct()
     {
+        $this->middleware('auth', ['except' => ['getIndex']]);
         $this->middleware('owner', ['only' => ['edit', 'delete']]);
     }
 
@@ -61,6 +62,6 @@ class ReviewController extends Controller
 
         $review->delete();
 
-        redirect('books');
+        return redirect('books');
     }
 }

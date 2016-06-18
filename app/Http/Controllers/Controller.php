@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Book;
+use App\Review;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -15,8 +15,8 @@ class Controller extends BaseController
 
     public function index()
     {
-        $books = Book::all();
+        $reviews = Review::latest()->orderBy('created_at', 'desc')->get();
 
-        return view('index');
+        return view('index', compact('reviews'));
     }
 }
