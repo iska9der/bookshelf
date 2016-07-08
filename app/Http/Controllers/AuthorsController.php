@@ -69,6 +69,23 @@ class AuthorsController extends Controller
         return redirect('authors');
     }
 
+
+    /**
+     * Сохранить новую книгу
+     *
+     * @param AuthorRequest $request
+     *
+     * @return mixed
+     */
+    private function createAuthor(AuthorRequest $request)
+    {
+        $author = Auth::user()->authors()->create($request->all());
+
+        return $author;
+
+    }
+
+
     /**
      * Редактировать
      * 
@@ -118,18 +135,4 @@ class AuthorsController extends Controller
         return redirect('authors');
     }
 
-    /**
-     * Сохранить новую книгу
-     *
-     * @param AuthorRequest $request
-     *
-     * @return mixed
-     */
-    private function createAuthor(AuthorRequest $request)
-    {
-        $author = Auth::user()->authors()->create($request->all());
-
-        return $author;
-
-    }
 }

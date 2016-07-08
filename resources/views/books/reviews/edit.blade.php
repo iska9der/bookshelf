@@ -6,7 +6,7 @@
     <hr>
     @include('errors.list')
 
-    {!! Form::model($book, ['method' => 'PATCH', 'action' => ['ReviewController@update', $book->id]]) !!}
+    {!! Form::model($review, ['method' => 'PATCH', 'action' => ['ReviewController@update', $book, $review->id]]) !!}
         @include('books.reviews.form', ['submitButtonText' => 'Внести изменения'])
     {!! Form::close() !!}
 

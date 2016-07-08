@@ -15,8 +15,8 @@ class ReviewController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['getIndex']]);
-        $this->middleware('owner', ['only' => ['edit', 'delete']]);
+        // $this->middleware('auth', ['except' => ['getIndex']]);
+        // $this->middleware('owner', ['only' => ['edit', 'delete']]);
     }
 
 
@@ -64,4 +64,23 @@ class ReviewController extends Controller
 
         return redirect('books');
     }
+
+
+    public function edit(Book $book, $id)
+    {
+        $review = Review::find($id);
+
+        return view('books.reviews.edit', compact('book', 'review'));
+    }
+
+    public function update(Book $book, $id, ReviewRequest $request)
+    {
+        $review = Review::findOrFail($id);
+
+        $review->update($request->all());
+
+        return redirect('books');
+    }
+
+
 }

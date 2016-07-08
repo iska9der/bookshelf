@@ -18,7 +18,7 @@
                     <small>{{ $review->created_at }}</small>
                     @if (Auth::user())
                         @if (Auth::user()->isAdmin())
-                            <a class="btn btn-default btn-sm" href="{{ url('/books', [$book->id, 'reviews', 'edit']) }}">Изменить</a>
+                            <a class="btn btn-default btn-sm" href="{{ url('/books', [$review->book->id, 'reviews', $review->id, 'edit']) }}">Изменить</a>
                             {!! Form::model($review, ['method' => 'DELETE', 'action' => ['ReviewController@destroy', $review->id], 'style' => 'display:inline-block']) !!}
                                 <button class="btn btn-danger btn-sm" type="submit">Удалить</button>
                             {!! Form::close() !!}

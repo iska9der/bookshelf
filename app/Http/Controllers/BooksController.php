@@ -74,6 +74,29 @@ class BooksController extends Controller
         return redirect('books');
     }
 
+
+    /**
+     * Сохранить новую книгу
+     *
+     * @param BookRequest $request
+     *
+     * @return mixed
+     */
+    private function createBook(BookRequest $request)
+    {
+
+        $book = Auth::user()->books()->create($request->all());
+
+        if($request->input('genre_list')) {
+            $this->syncGenres($book, $request->input('genre_list'));
+        }
+        if($request->input('author_list')) {
+            $this->syncAuthors($book, $request->input('author_list'));
+        }
+        return $book;
+    }
+
+
     /**
      * Редактировать
      * 
@@ -148,25 +171,4 @@ class BooksController extends Controller
         $book->authors()->sync($authors);
     }
 
-    /**
-     * Сохранить новую книгу
-     *
-     * @param BookRequest $request
-     *
-     * @return mixed
-     */
-    private function createBook(BookRequest $request)
-    {
-
-        $book = Auth::user()->books()->create($request->all());
-
-        if($request->input('genre_list')) {
-            $this->syncGenres($book, $request->input('genre_list'));
-        }
-        if($request->input('author_list')) {
-            $this->syncAuthors($book, $request->input('author_list'));
-        }
-        
-        return $book;
-    }
 }

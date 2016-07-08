@@ -21,6 +21,8 @@ Route::resource('books', 'BooksController');
 
 Route::group(['middleware' => ['web']], function(){
     Route::get('books/{book}/reviews', 'ReviewController@getIndex');
+    Route::get('books/{book}/reviews/{id}/edit', 'ReviewController@edit');
+    Route::patch('books/{book}/reviews/{id}', 'ReviewController@update');
     Route::post('books/{book}/reviews', 'ReviewController@postReview');
     Route::delete('books/{book}/reviews', 'ReviewController@destroy');
 
